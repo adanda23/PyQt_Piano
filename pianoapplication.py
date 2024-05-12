@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import * 
 from PyQt5.QtCore import * 
 import time
+import sys
 import fluidsynth
 import threading
 
@@ -14,6 +15,8 @@ fs.program_select(0, sfid, 0, 0)
 
 midiNaturalList = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 74, 76, 77, 79, 81, 83]
 midiAccidentalList = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82]
+naturalKeyList = [Qt.Key_A, Qt.Key_S, Qt.Key_D, Qt.Key_F, Qt.Key_G, Qt.Key_H, Qt.Key_J, Qt.Key_K, Qt.Key_L, Qt.Key_Semicolon, Qt.Key_Apostrophe, Qt.Key_Z, Qt.Key_X, Qt.Key_C, Qt.Key_V, Qt.Key_B, Qt.Key_N, Qt.Key_M, Qt.Key_Comma, Qt.Key_Period, Qt.Key_Backslash]
+accidentalKeyList = [Qt.Key_Q, Qt.Key_W, Qt.Key_E, Qt.Key_R, Qt.Key_T, Qt.Key_Y, Qt.Key_U, Qt.Key_I, Qt.Key_O, Qt.Key_P, Qt.Key_BracketLeft, Qt.Key_BracketRight]
 
 class Window(QMainWindow): 
     def __init__(self, sfid): 
@@ -60,7 +63,14 @@ class Window(QMainWindow):
             regularButton.clicked.connect(lambda: self.switchToRegular())
             regularButton.move(210,50)
 
-
+    def keyPressEvent(self, keyEvent):
+        for i in range(21):
+            if keyEvent.key()  == naturalKeyList[i]:
+                self.startNoteThread(midiNaturalList[i])
+        for i in range(12):
+            if keyEvent.key()  == accidentalKeyList[i]:
+                self.startNoteThread(midiAccidentalList[i])
+                
     def buttonCallbackNatural(self, i):
         return lambda: self.startNoteThread(midiNaturalList[i])
 
