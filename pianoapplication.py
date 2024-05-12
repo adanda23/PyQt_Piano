@@ -7,7 +7,7 @@ import threading
 
 app = QApplication([]) # Initializing Qt 
 fs = fluidsynth.Synth() # Initalizing fluidsynth
-fs.setting('synth.gain', 5.0 ) # Setting gain to be higher
+fs.setting('synth.gain', 10.0 ) # Setting gain to be higher
 fs.start(driver = 'dsound')  # use DirectSound driver
 sfid = fs.sfload("regular_piano.sf2")  
 fs.program_select(0, sfid, 0, 0)
@@ -16,15 +16,16 @@ midiNaturalList = [48, 50, 52, 53, 55, 57, 59, 60, 62, 64, 65, 67, 69, 71, 72, 7
 midiAccidentalList = [49, 51, 54, 56, 58, 61, 63, 66, 68, 70, 73, 75, 78, 80, 82]
 
 class Window(QMainWindow): 
-    def __init__(self): 
+    def __init__(self, sfid): 
         super().__init__() 
         self.setWindowTitle("Piano") 
-        self.resize(1255,720)
+        self.setFixedSize(1255,720)
         self.keyboard() 
         self.show() 
-
+        self.sfid = sfid
+        
     def keyboard(self): 
-            ##
+            ##    
             naturalKeys = []
             for i in range(21):
                 naturalKeys.append(QPushButton("", self)) 
@@ -39,22 +40,25 @@ class Window(QMainWindow):
                     accidentalKeys[-1].move(133 + j*50 + i*350, 150) 
                     accidentalKeys[-1].resize(36, 175) 
                     accidentalKeys[-1].clicked.connect(self.buttonCallbackAccidental(i*5+j))
-
-
             for i in range(3):
                 for j in range(3):
                     accidentalKeys.append(QPushButton("", self))
                     accidentalKeys[-1].move(283 + j*50 + i*350, 150) 
                     accidentalKeys[-1].resize(36, 175) 
                     accidentalKeys[-1].clicked.connect(self.buttonCallbackAccidental(i*5+j+2))
-
             for key in accidentalKeys:
                 key.setStyleSheet('''QPushButton {
                                         background-color: rgb(55, 55, 55) ;
                                         border-radius: 5px;
-                                        text-align: bottom; 
-                                    }''')            
+                                    }''')        
+                
+            nintendoButton = QPushButton("Nintendo", self)
+            nintendoButton.clicked.connect(lambda: self.switchToNintendo())
+            nintendoButton.move(100,50)
 
+            regularButton = QPushButton("Regular", self)
+            regularButton.clicked.connect(lambda: self.switchToRegular())
+            regularButton.move(210,50)
 
 
     def buttonCallbackNatural(self, i):
@@ -72,11 +76,17 @@ class Window(QMainWindow):
         time.sleep(3.0)
         fs.noteoff(0, key)
 
-
+    def switchToNintendo(self):
+        fs.sfunload(self.sfid)
+        sfid = fs.sfload("nintendo_soundfont.sf2")  
+        fs.program_select(0, sfid, 0, 0) 
+    def switchToRegular(self):
+        fs.sfunload(self.sfid)
+        sfid = fs.sfload("regular_piano.sf2")  
+        fs.program_select(0, sfid, 0, 0) 
+        
         
 
-window = Window()
-
-
+window = Window(sfid)
 
 app.exec()
