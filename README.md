@@ -9,3 +9,16 @@
 You can play notes by both either clicking on the keys themselves or using your keyboard: 
 To play the white keys using your keyboard, you can use keys A-L, semicolon, apostrophe, Z-M, comma, period, and backslash. 
 To play the black keys, you can use keys Q-P and both the bracket keys.
+
+## Attributions:
+Nintendo soundfont created by hackerg
+https://musical-artifacts.com/artifacts/610
+under [Creative Commons Attribution 4.0 International](http://creativecommons.org/licenses/by/4.0/deed.en)
+
+Kalimba soundfont created by Sizz Tuna
+https://musical-artifacts.com/artifacts/4039
+under [Creative Commons Attribution-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/deed.en)
+
+Drums soundfont created by daryl
+https://musical-artifacts.com/artifacts/3832
+under [Creative Commons Attribution 3.0 Unported](https://creativecommons.org/licenses/by/3.0/deed.en)
