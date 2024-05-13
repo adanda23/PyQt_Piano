@@ -1,5 +1,7 @@
 # Virtual Piano made with PyQt and FluidSynth :musical_keyboard:
 
+https://github.com/adanda23/PyQt_Piano/assets/63593887/fab097d7-09bb-4386-b26b-09945de29f70
+
 ## Features:
 - Can switch between different soundfonts such as Kalimba, Nintendo, Regular, and Drums
 - Can add custom soundfont files by adding any soundfont file to the soundfonts folder and renaming it "custom.sf2"
