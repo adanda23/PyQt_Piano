@@ -2,14 +2,19 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import * 
 from PyQt5.QtCore import * 
 import time
+import os
 import fluidsynth
 import threading
+
+##gets path of current directory which will be needed later to load soundfonts
+current_dir = os.path.dirname("pianoapplication.py")
+soundfonts_folder_path = os.path.join(current_dir, 'soundfonts')
 
 app = QApplication([]) # Initializing Qt 
 fs = fluidsynth.Synth() # Initalizing fluidsynth
 fs.setting('synth.gain', 10.0 ) # Setting gain to be higher
 fs.start(driver = 'dsound')  # use DirectSound driver
-sfid = fs.sfload("regular_piano.sf2")  # Selects the regular piano soundfont
+sfid = fs.sfload(soundfonts_folder_path + "\\regular_piano.sf2")  # Selects the regular piano soundfont
 fs.program_select(0, sfid, 0, 0) # Sets the channel, bank, and preset to 0 and loads the piano soundfont
 
 # Lists of all the MIDI key numbers and all the Qt Keys 
@@ -127,23 +132,23 @@ class Window(QMainWindow):
     ## These functions unload the current soundfont and load a new one based on the file name
     def switchToNintendo(self):
         fs.sfunload(self.sfid)
-        sfid = fs.sfload("nintendo_soundfont.sf2")  
+        sfid = fs.sfload(soundfonts_folder_path + "\\nintendo_soundfont.sf2")  
         fs.program_select(0, sfid, 0, 0) 
     def switchToRegular(self):
         fs.sfunload(self.sfid)
-        sfid = fs.sfload("regular_piano.sf2")  
+        sfid = fs.sfload(soundfonts_folder_path + "\\regular_piano.sf2")    
         fs.program_select(0, sfid, 0, 0) 
     def switchToDrums(self):
         fs.sfunload(self.sfid)
-        sfid = fs.sfload("drums.sf2")  
+        sfid = fs.sfload(soundfonts_folder_path + "\\drums.sf2")  
         fs.program_select(0, sfid, 0, 0) 
     def switchToKalimba(self):
         fs.sfunload(self.sfid)
-        sfid = fs.sfload("kalimba.sf2")  
+        sfid = fs.sfload(soundfonts_folder_path + "\\kalimba.sf2")    
         fs.program_select(0, sfid, 0, 0) 
     def switchToCustom(self):
         fs.sfunload(self.sfid)
-        sfid = fs.sfload("custom.sf2")  
+        sfid = fs.sfload(soundfonts_folder_path + "\\custom.sf2")    
         fs.program_select(0, sfid, 0, 0) 
         
     def showHideClick(self, label):

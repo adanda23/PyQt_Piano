@@ -1,6 +1,3 @@
 myenv/
 .vscode/
-regular_piano.sf2
-nintendo_soundfont.sf2
-drums.sf2
-kalimba.sf2
+soundfonts/
