@@ -1,6 +1,8 @@
 # Virtual Piano made with PyQt and FluidSynth :musical_keyboard:
 
-https://github.com/adanda23/PyQt_Piano/assets/63593887/fab097d7-09bb-4386-b26b-09945de29f70
+https://github.com/adanda23/PyQt_Piano/assets/63593887/a3a268c9-c15e-45e2-932f-d7fab235cbe3
+In this demo video, I switch between using my mouse and my laptop keyboard to play notes and chords. 
+I also switch between the different sound profiles/soundfonts.
 
 ## Features:
 - Can switch between different soundfonts such as Kalimba, Nintendo, Regular, and Drums
